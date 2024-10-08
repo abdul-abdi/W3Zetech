@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background bg-opacity-80 backdrop-blur-md' : 'bg-transparent'
+        isScrolled ? 'bg-background shadow-lg' : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -50,15 +50,15 @@ export default function Header() {
           </motion.div>
           <nav className="hidden sm:block">
             <ul className="flex space-x-4 sm:space-x-6">
-              <li><Link href="#about" className="text-text-primary hover:text-accent-1 transition">About</Link></li>
-              <li><Link href="#why-join" className="text-text-primary hover:text-accent-1 transition">Why Join</Link></li>
-              <li><Link href="#learn" className="text-text-primary hover:text-accent-1 transition">Learn</Link></li>
-              <li><Link href="#team" className="text-text-primary hover:text-accent-1 transition">Team</Link></li>
-              <li><Link href="#faq" className="text-text-primary hover:text-accent-1 transition">FAQ</Link></li>
-              <li><Link href="#contact" className="text-text-primary hover:text-accent-1 transition">Contact</Link></li>
+              <li><Link href="#about" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>About</Link></li>
+              <li><Link href="#why-join" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>Why Join</Link></li>
+              <li><Link href="#learn" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>Learn</Link></li>
+              <li><Link href="#team" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>Team</Link></li>
+              <li><Link href="#faq" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>FAQ</Link></li>
+              <li><Link href="#contact" className={`${isScrolled ? 'text-text-primary' : 'text-white'} hover:text-accent-1 transition`}>Contact</Link></li>
             </ul>
           </nav>
-          <button className="sm:hidden text-text-primary" onClick={toggleMobileMenu}>
+          <button className={`sm:hidden ${isScrolled ? 'text-text-primary' : 'text-white'}`} onClick={toggleMobileMenu}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
@@ -66,23 +66,26 @@ export default function Header() {
         </div>
       </div>
       {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="sm:hidden bg-background bg-opacity-95 backdrop-blur-md"
-        >
-          <ul className="py-4 px-6 space-y-4">
-            <li><Link href="#about" className="text-text-primary hover:text-accent-1 transition block">About</Link></li>
-            <li><Link href="#why-join" className="text-text-primary hover:text-accent-1 transition block">Why Join</Link></li>
-            <li><Link href="#learn" className="text-text-primary hover:text-accent-1 transition block">Learn</Link></li>
-            <li><Link href="#team" className="text-text-primary hover:text-accent-1 transition block">Team</Link></li>
-            <li><Link href="#faq" className="text-text-primary hover:text-accent-1 transition block">FAQ</Link></li>
-            <li><Link href="#contact" className="text-text-primary hover:text-accent-1 transition block">Contact</Link></li>
-          </ul>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className={`sm:hidden ${isScrolled ? 'bg-background' : 'bg-black bg-opacity-80'}`}
+          >
+            <ul className="py-4 px-6 space-y-4">
+              <li><Link href="#about" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>About</Link></li>
+              <li><Link href="#why-join" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>Why Join</Link></li>
+              <li><Link href="#learn" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>Learn</Link></li>
+              <li><Link href="#team" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>Team</Link></li>
+              <li><Link href="#faq" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>FAQ</Link></li>
+              <li><Link href="#contact" className="text-text-primary hover:text-accent-1 transition block" onClick={toggleMobileMenu}>Contact</Link></li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
