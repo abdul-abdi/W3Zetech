@@ -1,11 +1,28 @@
 'use client'
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaLinkedin, FaGithub, FaWhatsapp, FaBitcoin, FaEthereum } from 'react-icons/fa';
 import Link from 'next/link';
+import { FaTwitter, FaLinkedin, FaGithub, FaWhatsapp, FaBitcoin, FaEthereum } from 'react-icons/fa';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [currentColor, setCurrentColor] = useState(0);
+
+  const colors = [
+    'from-blue-500 to-purple-500',
+    'from-green-400 to-blue-500',
+    'from-yellow-400 to-orange-500',
+    'from-pink-500 to-red-500',
+    'from-indigo-500 to-purple-500'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentColor((prev) => (prev + 1) % colors.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -37,7 +54,11 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-accent-1 to-accent-2 text-transparent bg-clip-text mb-4">W3Zetech</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              <span className={`font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${colors[currentColor]} transition-all duration-300`}>
+                W3Zetech
+              </span>
+            </h3>
             <p className="text-text-secondary">Empowering the next generation of blockchain innovators</p>
           </motion.div>
           <motion.div 
@@ -102,7 +123,7 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <p className="text-text-secondary">
-            © {currentYear} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-1 to-accent-2">W3Zetech Blockchain Learning Club</span>. All rights reserved.
+            © {currentYear} <span className={`text-transparent bg-clip-text bg-gradient-to-r ${colors[currentColor]} transition-all duration-300`}>W3Zetech Blockchain Learning Club</span>. All rights reserved.
           </p>
         </motion.div>
       </div>

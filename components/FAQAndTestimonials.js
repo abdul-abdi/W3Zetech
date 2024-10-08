@@ -76,11 +76,11 @@ export default function FAQAndTestimonials() {
 
   return (
     <section id="faq-and-testimonials" className="min-h-screen flex items-center justify-center relative overflow-hidden py-10">
-      <div className="w-full max-w-7xl mx-auto flex flex-col bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-8 relative overflow-hidden z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="w-full max-w-7xl mx-auto flex flex-col bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-4 sm:p-8 relative overflow-hidden z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           <div>
             <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-8 text-center text-accent-1"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center text-accent-1"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -91,7 +91,7 @@ export default function FAQAndTestimonials() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               {faqs.map((faq, index) => (
                 <motion.div
@@ -130,9 +130,9 @@ export default function FAQAndTestimonials() {
               ))}
             </motion.div>
           </div>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center mt-8 lg:mt-0">
             <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-8 text-center text-accent-1"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center text-accent-1"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
