@@ -1,9 +1,22 @@
 'use client'
 
-import { motion } from 'framer-motion';
-import { FaHandsHelping, FaNetworkWired, FaCalendarAlt, FaBrain, FaGlobeAmericas, FaRocket } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaHandsHelping, FaNetworkWired, FaCalendarAlt, FaBrain, FaGlobeAmericas, FaRocket, FaChevronDown } from 'react-icons/fa';
 
 export default function WhyJoin() {
+  const [expandedReason, setExpandedReason] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const reasons = [
     {
       title: "Hands-on Experience",
@@ -56,6 +69,14 @@ export default function WhyJoin() {
     visible: { y: 0, opacity: 1 }
   };
 
+  const toggleReason = (index) => {
+    if (isMobile) {
+      setExpandedReason(expandedReason === index ? null : index);
+    }
+  };
+
+  const visibleReasons = isMobile ? reasons.slice(0, 3) : reasons;
+
   return (
     <section id="why-join" className="min-h-screen flex items-center justify-center relative overflow-hidden py-10">
       <div className="w-full max-w-7xl mx-auto flex flex-col bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-4 sm:p-8 relative overflow-hidden z-10">
@@ -75,11 +96,12 @@ export default function WhyJoin() {
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8"
           >
-            {reasons.map((reason, index) => (
+            {visibleReasons.map((reason, index) => (
               <motion.div 
                 key={reason.title}
-                className={`bg-background bg-opacity-50 p-4 sm:p-6 rounded-lg shadow-lg relative overflow-hidden group transition-all duration-300 bg-gradient-to-br ${reason.color} border border-accent-1`}
+                className={`bg-background bg-opacity-50 p-4 sm:p-6 rounded-lg shadow-lg relative overflow-hidden group transition-all duration-300 bg-gradient-to-br ${reason.color} border border-accent-1 cursor-pointer`}
                 variants={itemVariants}
+                onClick={() => toggleReason(index)}
               >
                 <motion.div 
                   className="absolute top-0 right-0 text-white opacity-10 group-hover:opacity-20 transition-opacity duration-300"
@@ -91,9 +113,27 @@ export default function WhyJoin() {
                 </motion.div>
                 <reason.icon size={40} className="text-white mb-4 group-hover:scale-110 transition-transform duration-300" />
                 <h3 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-4 text-white transition-colors duration-300">{reason.title}</h3>
-                <p className="text-white text-sm sm:text-lg hidden sm:block">
-                  {reason.description}
-                </p>
+                <AnimatePresence>
+                  {(!isMobile || expandedReason === index) && (
+                    <motion.p
+                      className="text-white text-sm sm:text-lg"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {reason.description}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+                {isMobile && (
+                  <motion.div
+                    className="absolute bottom-2 right-2 text-white"
+                    animate={{ rotate: expandedReason === index ? 180 : 0 }}
+                  >
+                    <FaChevronDown />
+                  </motion.div>
+                )}
               </motion.div>
             ))}
           </motion.div>
