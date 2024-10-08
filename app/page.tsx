@@ -12,11 +12,11 @@ export default function Home() {
     <div className="snap-y snap-mandatory h-screen overflow-y-scroll">
       <Header />
       <section id="hero" className="snap-start h-screen"><Hero /></section>
-      <section id="about" className="snap-start h-screen"><About /></section>
-      <section id="why-join" className="snap-start h-screen"><WhyJoin /></section>
-      <section id="learn" className="snap-start h-screen"><Learn /></section>
-      <section id="team" className="snap-start h-screen"><Team /></section>
-      <section id="faq" className="snap-start h-screen"><FAQAndTestimonials /></section>
+      <section id="about" className="snap-start min-h-screen"><About /></section>
+      <section id="why-join" className="snap-start min-h-screen"><WhyJoin /></section>
+      <section id="learn" className="snap-start min-h-screen"><Learn /></section>
+      <section id="team" className="snap-start min-h-screen"><Team /></section>
+      <section id="faq" className="snap-start min-h-screen"><FAQAndTestimonials /></section>
       <section id="contact" className="snap-start min-h-screen">
         <Contact />
       </section>

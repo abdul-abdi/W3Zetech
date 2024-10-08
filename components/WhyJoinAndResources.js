@@ -58,14 +58,14 @@ export default function WhyJoin() {
 
   return (
     <section id="why-join" className="min-h-screen flex items-center justify-center relative overflow-hidden py-10">
-      <div className="w-full max-w-7xl mx-auto flex flex-col bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-8 relative overflow-hidden z-10">
+      <div className="w-full max-w-7xl mx-auto flex flex-col bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-4 sm:p-8 relative overflow-hidden z-10">
         <motion.h2 
-          className="text-4xl md:text-5xl font-bold mb-8 text-center text-accent-1"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-accent-1"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Why Join W3Zetech
+          Why Join w3zetech
         </motion.h2>
 
         <div className="flex-grow overflow-y-auto">
@@ -73,12 +73,12 @@ export default function WhyJoin() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8"
           >
             {reasons.map((reason, index) => (
               <motion.div 
                 key={reason.title}
-                className={`bg-background bg-opacity-50 p-6 rounded-lg shadow-lg relative overflow-hidden group transition-all duration-300 bg-gradient-to-br ${reason.color} border border-accent-1`}
+                className={`bg-background bg-opacity-50 p-4 sm:p-6 rounded-lg shadow-lg relative overflow-hidden group transition-all duration-300 bg-gradient-to-br ${reason.color} border border-accent-1`}
                 variants={itemVariants}
               >
                 <motion.div 
@@ -90,8 +90,8 @@ export default function WhyJoin() {
                   <reason.icon size={120} />
                 </motion.div>
                 <reason.icon size={40} className="text-white mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-2xl font-semibold mb-4 text-white transition-colors duration-300">{reason.title}</h3>
-                <p className="text-white text-lg">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-4 text-white transition-colors duration-300">{reason.title}</h3>
+                <p className="text-white text-sm sm:text-lg hidden sm:block">
                   {reason.description}
                 </p>
               </motion.div>
@@ -99,7 +99,6 @@ export default function WhyJoin() {
           </motion.div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent-3 opacity-10"></div>
     </section>
   );
 }

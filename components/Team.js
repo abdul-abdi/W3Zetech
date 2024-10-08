@@ -54,16 +54,16 @@ export default function Team() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-20">
-      <div className="w-full max-w-7xl mx-auto px-6 z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-10 sm:py-20">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 z-10">
         <motion.div 
-          className="bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-12 relative overflow-hidden"
+          className="bg-background bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl p-6 sm:p-12 relative overflow-hidden"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -74,12 +74,12 @@ export default function Team() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8"
           >
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}
-                className={`bg-background bg-opacity-50 p-6 rounded-lg shadow-lg relative overflow-hidden transition-all duration-300 bg-gradient-to-br ${member.color} border border-accent-1`}
+                className={`bg-background bg-opacity-50 p-4 sm:p-6 rounded-lg shadow-lg relative overflow-hidden transition-all duration-300 bg-gradient-to-br ${member.color} border border-accent-1`}
                 variants={itemVariants}
               >
                 <motion.div 
@@ -100,9 +100,9 @@ export default function Team() {
                       e.currentTarget.src = '/images/default-avatar.png';
                     }}
                   />
-                  <h3 className="text-2xl font-semibold mb-2 text-white text-center">{member.name}</h3>
-                  <p className="text-white text-opacity-80 mb-4 text-center">{member.role}</p>
-                  <p className="text-white text-opacity-90 mb-4 text-sm">
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white text-center">{member.name}</h3>
+                  <p className="text-white text-opacity-80 mb-2 sm:mb-4 text-center">{member.role}</p>
+                  <p className="text-white text-opacity-90 mb-4 text-sm hidden sm:block">
                     {member.bio}
                   </p>
                   <div className="flex justify-center space-x-4 mt-4">
